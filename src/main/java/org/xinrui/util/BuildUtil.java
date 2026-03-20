@@ -34,11 +34,11 @@ public class BuildUtil {
         info.setDoctorName(null); // 不从DTO获取
 
         //下面字段为康孕所需，无创这边做统一处理
-        info.setDetectObj(0);//无创项目暂时填0
-        info.setIsSavePedigree(0);//无创项目暂时填0(当做没有录入家系)
+//        info.setDetectObj(0);//无创项目暂时填0
+//        info.setIsSavePedigree(0);//无创项目暂时填0(当做没有录入家系)
         info.setProbandSample(null);//没有录入家属不用填
-        info.setClientRelation(8);//
-        info.setClientType(8);
+//        info.setClientRelation(8);//
+//        info.setClientType(8);
         info.setDetectReason(null);
         info.setClinicalDiagnosis(null);
         info.setDetectClinicalDiagnosis(null);
@@ -117,20 +117,20 @@ public class BuildUtil {
         exam.setSpecialCase(dto.getSpecialCase());
 
         //下面字段为康孕所需，无创这边做统一处理
-        exam.setMaleDetectFlag(0);
+//        exam.setMaleDetectFlag(0);
         exam.setDetectMethodMale(null);
         exam.setDetectResultMale(null);
-        exam.setFemaleDetectFlag(0);
+//        exam.setFemaleDetectFlag(0);
         exam.setDetectMethodFemale(null);
         exam.setDetectResultFemale(null);
-        exam.setChildDetectFlag(0);
+//        exam.setChildDetectFlag(0);
         exam.setDetectMethodChild(null);
         exam.setDetectResultChild(null);
-        exam.setIllnessHistoryGeneticFlag(0);
+//        exam.setIllnessHistoryGeneticFlag(0);
         exam.setIllnessHistoryPastMale(null);
         exam.setIllnessHistoryPastFemale(null);
         exam.setUltrasoundTestDate( null);
-        exam.setFetusTestFlag(0);
+//        exam.setFetusTestFlag(0);
         //结束
 
         exam.setIntver(INVERT);
