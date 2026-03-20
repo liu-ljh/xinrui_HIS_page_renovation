@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xinrui.mapper.SampleMapper">
+    <select id="selectCollectDateBySAId" resultType="java.time.LocalDate">
+        SELECT blood_collection_time
+        FROM t_mchi_blood_film_management
+        WHERE screening_archives_id = #{screeningArchivesId, jdbcType=BIGINT}
+            LIMIT 1
+    </select>
+    <select id="selectSampleRegistrationBySAId" resultType="org.xinrui.dto.SampleRegistrationDto">
+        SELECT
+            -- 基本信息
+            bf.experiment_number AS sampleId,
+            bf.experiment_number AS oldSampleNum,
+            bf.screening_archives_id AS screeningArchivesId,
+
+            -- SampleInfo 字段（数值类型转 String）
+            CAST(si.sample_type AS CHAR) AS sampleType,
+            CAST(si.shipment_condition AS CHAR) AS shipmentCondition,
+            CAST(si.tube_type AS CHAR) AS tubeType,
+            si.product_no AS productName,
+
+            -- PatientInfo 字段
+            pi.phone,
+            pi.identity,
+            pi.emergency_contact AS emergencyContact,
+            pi.emergency_contact_phone AS emergencyContactPhone,
+
+            -- ExaminationInfo 字段
+            ei.patient_age AS age,
+            ei.patient_height AS height,
+            ei.patient_weight AS weight,
+            ei.bh_gravidity AS bhGravidity,
+            ei.bh_parity AS bhParity,
+            ei.bh_other AS bhOther,
+            ei.ivf_flag AS ivfFlag,
+            ei.tubebaby_type AS tubebabyType,
+            CAST(ei.fetus_type AS CHAR) AS fetusType,
+            CAST(ei.fetus_type AS CHAR) AS pregnancy,
+            ei.gestational_weeks AS gestationalWeeks,
+            ei.gestational_days AS gestationalDays,
+            ei.us_check AS usCheck,
+            ei.us_result AS usResult,
+            DATE_FORMAT(ei.reduce_date, '%Y-%m-%d') AS reduceDate,
+            ei.down_symdrome_flag AS downSymdromeFlag,
+            ei.down_symdrome_result1 AS downSymdromeResult1,
+            ei.down_symdrome_result2 AS downSymdromeResult2,
+            ei.down_symdrome_result_oth AS downSymdromeResultOth,
+            ei.puncture_appointment AS punctureAppointment,
+            DATE_FORMAT(ei.puncture_appointment_date, '%Y-%m-%d') AS punctureAppointmentDate,
+            ei.transplantation AS transplantation,
+            DATE_FORMAT(ei.transplantation_date, '%Y-%m-%d') AS transplantationDate,
+            ei.allogeneic_transfusion AS allogeneicTransfusion,
+            DATE_FORMAT(ei.allogeneic_transfusion_date, '%Y-%m-%d') AS allogeneicTransfusionDate,
+            ei.immunotherapy AS immunotherapy,
+            DATE_FORMAT(ei.immunotherapy_date, '%Y-%m-%d') AS immunotherapyDate,
+            ei.immunotherapy_type AS immunotherapyType,
+            ei.special_case AS specialCase,
+            ei.patient_remark AS remark
+        FROM t_mchi_blood_film_management bf
+                 LEFT JOIN t_lis_sample si ON bf.experiment_number = si.sample_id
+                 LEFT JOIN t_mchi_patient pi ON si.patient_oid = pi.oid
+                 LEFT JOIN t_lis_examination ei ON si.oid = ei.sample_oid
+        WHERE bf.screening_archives_id = #{screeningArchivesId}
+            LIMIT 1
+    </select>
+</mapper>

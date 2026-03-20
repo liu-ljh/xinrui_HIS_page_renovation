@@ -1,0 +1,67 @@
+server:
+  port: 8030
+  address: 172.18.4.89
+
+spring:
+  datasource:
+    url:  jdbc:mysql://172.18.4.54:3306/mchi?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: mchi_user
+    password: mchi_user
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    inetutils:
+      preferred-networks: 192.168.3
+    nacos:
+      discovery:
+        server-addr: 192.168.3.17:8848
+      config:
+        server-addr: 192.168.3.17:8848
+  redis:
+    host: 192.168.3.17
+    port: 6379
+    password:
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+  cloud:
+    nacos:
+      discovery:
+        enabled: false # 在生产环境禁用发现客户端
+
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB   # 单文件最大100MB
+      max-request-size: 100MB # 单次请求最大100MB
+      file-size-threshold: 2KB # 超过2KB写入临时文件
+
+
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
+  global-config:
+    db-config:
+      insert-strategy: not_null
+      update-strategy: not_null
+
+
+# RestTemplate配置
+rest:
+  template:
+    connect-timeout: 3000
+    read-timeout: 5000
+
+
+
+
+

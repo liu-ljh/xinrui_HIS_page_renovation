@@ -1,0 +1,9 @@
+server:
+  port: 8031
+
+#数据源配置
+spring:
+  application:
+    name: xinrui-bgi
+  profiles:
+    active: dev

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xinrui.mapper.TestCnvInfoMapper">
+    <!-- 批量插入CNV信息 -->
+    <insert id="insertBatch" parameterType="java.util.List">
+        <!-- 只有当 list 不为空且 size 大于 0 时，才执行插入 -->
+        <if test="list != null and list.size() > 0">
+            INSERT INTO t_lis_test_cnv (
+            result_oid,
+            cnv_category,
+            cytoband,
+            chr_num,
+            cnv_type,
+            cnv_size,
+            site,
+            del_dup_desc,
+            disease_name,
+            disease_detail,
+            disease_description,
+            updated_by,
+            updated_on
+            ) VALUES
+            <foreach collection="list" item="item" separator=",">
+                (
+                #{item.resultOid},
+                #{item.cnvCategory},
+                #{item.cytoband},
+                #{item.chrNum},
+                #{item.cnvType},
+                #{item.cnvSize},
+                #{item.site},
+                #{item.delDupDesc},
+                #{item.diseaseName},
+                #{item.diseaseDetail},
+                #{item.diseaseDescription},
+                #{item.updatedBy},
+                #{item.updatedOn}
+                )
+            </foreach>
+        </if>
+    </insert>
+</mapper>
