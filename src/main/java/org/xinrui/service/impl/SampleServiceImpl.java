@@ -89,7 +89,7 @@ public class SampleServiceImpl implements SampleService {
                     Wrappers.<SampleInfo>lambdaQuery()
                             .eq(SampleInfo::getSampleId, sampleRegistrationDto.getSampleId())
             );
-        }catch (org.apache.ibatis.exceptions.TooManyResultsException e){
+        }catch (com.baomidou.mybatisplus.core.exceptions.MybatisPlusException e ){
             throw new TooManyResultsException("t_lis_sample", "sample_id");
         }
 
@@ -123,7 +123,7 @@ public class SampleServiceImpl implements SampleService {
                     Wrappers.<ExaminationInfo>lambdaQuery()
                             .eq(ExaminationInfo::getSampleOid, sampleOid)
             );
-        }catch (org.apache.ibatis.exceptions.TooManyResultsException e){
+        }catch (com.baomidou.mybatisplus.core.exceptions.MybatisPlusException e ){
             throw new TooManyResultsException("t_lis_examination", "sample_oid");
         }
 
