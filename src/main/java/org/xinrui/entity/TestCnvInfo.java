@@ -1,9 +1,6 @@
 package org.xinrui.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,7 +36,7 @@ public class TestCnvInfo implements Serializable {
     private String cytoband;
 
     @ApiModelProperty(value = "染色体编号(1-23)", example = "1")
-    @TableField("chr_num")
+    @TableField(value = "chr_num",insertStrategy = FieldStrategy.IGNORED)
     private Integer chrNum;
 
     @ApiModelProperty(value = "异常类型 del/dup", example = "dup")
@@ -71,7 +68,7 @@ public class TestCnvInfo implements Serializable {
     private String diseaseDescription;
 
     @ApiModelProperty(value = "数据版本(审计字段)", example = "0")
-    @TableField("intver")
+    @TableField(value = "intver",insertStrategy = FieldStrategy.IGNORED)
     private Integer intver;
 
     @ApiModelProperty(value = "最后更新人ID(审计字段)", example = "5001")

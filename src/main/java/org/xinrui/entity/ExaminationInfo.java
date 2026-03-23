@@ -1,9 +1,7 @@
 package org.xinrui.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -160,16 +158,18 @@ public class ExaminationInfo implements Serializable {
     @TableField("down_symdrome_result_oth")
     private String downSymdromeResultOth;
 
+
+
     @ApiModelProperty(value = "预约穿刺诊断情况 1-已预约 0-无", example = "0")
-    @TableField("puncture_appointment")
+    @TableField(value = "puncture_appointment",insertStrategy = FieldStrategy.IGNORED)
     private Integer punctureAppointment;
 
-    @ApiModelProperty(value = "穿刺诊断预约日期", example = "2023-10-01 12:00:00")
+
     @TableField("puncture_appointment_date")
     private LocalDateTime punctureAppointmentDate;
 
     @ApiModelProperty(value = "移植手术 1-有 0-无", example = "0")
-    @TableField("transplantation")
+    @TableField(value = "transplantation",insertStrategy = FieldStrategy.IGNORED)
     private Integer transplantation;
 
     @ApiModelProperty(value = "移植手术日期", example = "2023-10-01 12:00:00")
@@ -177,7 +177,7 @@ public class ExaminationInfo implements Serializable {
     private LocalDateTime transplantationDate;
 
     @ApiModelProperty(value = "异体输血 1-有 0-无", example = "0")
-    @TableField("allogeneic_transfusion")
+    @TableField(value = "allogeneic_transfusion",insertStrategy = FieldStrategy.IGNORED)
     private Integer allogeneicTransfusion;
 
     @ApiModelProperty(value = "异体输血日期", example = "2023-10-01 12:00:00")
@@ -185,7 +185,7 @@ public class ExaminationInfo implements Serializable {
     private LocalDateTime allogeneicTransfusionDate;
 
     @ApiModelProperty(value = "免疫治疗 1-有 0-无", example = "0")
-    @TableField("immunotherapy")
+    @TableField(value = "immunotherapy",insertStrategy = FieldStrategy.IGNORED)
     private Integer immunotherapy;
 
     @ApiModelProperty(value = "免疫治疗日期", example = "2023-10-01 12:00:00")

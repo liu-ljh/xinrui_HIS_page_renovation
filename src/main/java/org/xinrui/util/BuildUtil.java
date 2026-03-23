@@ -33,7 +33,7 @@ public class BuildUtil {
         info.setDepartmentName(null); // 不从DTO获取
         info.setDoctorName(null); // 不从DTO获取
 
-        //下面字段为康孕所需，无创这边做统一处理
+        //下面字段为康孕所需，前端改造这边做统一处理
 //        info.setDetectObj(0);//无创项目暂时填0
 //        info.setIsSavePedigree(0);//无创项目暂时填0(当做没有录入家系)
         info.setProbandSample(null);//没有录入家属不用填

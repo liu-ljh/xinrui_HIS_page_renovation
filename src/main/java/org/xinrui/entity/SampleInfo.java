@@ -1,9 +1,6 @@
 package org.xinrui.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -58,15 +55,15 @@ public class SampleInfo implements Serializable {
 
     @ApiModelProperty(value = "样本类型代码：无创{1. 全血、2. 血浆、4. DNA}，康孕{1：产前绒毛；2：流产物绒毛；4：胎儿组织；8：羊水；16：脐带血；\n" +
             "32：产前样本DNA；128：产后样本DNA；64：外周血256:羊水培养细胞}", example = "1")
-    @TableField("sample_type")
+    @TableField(value = "sample_type" )
     private Integer sampleType;
 
     @ApiModelProperty(value = "运输条件：1. 4°C、2. 6~35°C、4. dry ice", example = "1")
-    @TableField("shipment_condition")
+    @TableField(value = "shipment_condition")
     private Integer shipmentCondition;
 
     @ApiModelProperty(value = "采血管类型代码：1. Streck管、2. EDTA管、4. K管、8. G管、16. X管", example = "1")
-    @TableField("tube_type")
+    @TableField(value = "tube_type")
     private Integer tubeType;
 
     @ApiModelProperty(value = "取样时间", example = "2023-08-15 14:30:00")
@@ -82,11 +79,11 @@ public class SampleInfo implements Serializable {
     private String oldSampleNum;
 
     @ApiModelProperty(value = "附加报告标志 Y/N,枚举：1. 是、2. 否", example = "1")
-    @TableField("additional_report_flag")
+    @TableField(value = "additional_report_flag" ,insertStrategy = FieldStrategy.IGNORED)
     private Integer additionalReportFlag;
 
     @ApiModelProperty(value = "重复次数（>1为重复样本）", example = "1")
-    @TableField("repeat_count")
+    @TableField(value = "repeat_count",insertStrategy = FieldStrategy.IGNORED)
     private Integer repeatCount;
 
     @ApiModelProperty(value = "产品套餐编号", example = "PROD_2023")
@@ -126,11 +123,11 @@ public class SampleInfo implements Serializable {
     private LocalDateTime updatedOn;
 
     @ApiModelProperty(value = "送检对象类型:1-胚胎胎儿 2-疑似患者", example = "1")
-    @TableField("detect_obj")
+    @TableField(value = "detect_obj",insertStrategy = FieldStrategy.IGNORED)
     private Integer detectObj;
 
     @ApiModelProperty(value = "是否录入家系:1-是 0-否", example = "1")
-    @TableField("is_save_pedigree")
+    @TableField(value = "is_save_pedigree",insertStrategy = FieldStrategy.IGNORED)
     private Integer isSavePedigree;
 
     @ApiModelProperty(value = "先证者样本编号如果是否录入家系选择1；是，则需填写先证者样本编号", example = "SMP2023001")
@@ -138,11 +135,11 @@ public class SampleInfo implements Serializable {
     private String probandSample;
 
     @ApiModelProperty(value = "已知家系关系：1-父亲 2-母亲 4-本人 8-其他", example = "1")
-    @TableField("client_relation")
+    @TableField(value = "client_relation",insertStrategy = FieldStrategy.IGNORED)
     private Integer clientRelation;
 
     @ApiModelProperty(value = "受检者类型:1-确诊患者；2-疑似患者；4-表型正常人群；8-其他", example = "1")
-    @TableField("client_type")
+    @TableField(value = "client_type",insertStrategy = FieldStrategy.IGNORED)
     private Integer clientType;
 
     @ApiModelProperty(value = "送检原因：1-无创提示高风险；2-≥35岁孕妇；3-自然流产；4-稽留流", example = "1")

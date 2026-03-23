@@ -1,5 +1,6 @@
 package org.xinrui.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.xinrui.exception.TooManyResultsException;
@@ -57,8 +58,16 @@ public class SampleServiceImpl implements SampleService {
         try {
             patientInfo = patientInfoMapper.selectOne(
                     Wrappers.<PatientInfo>lambdaQuery()
-                            .or(query -> query.eq(PatientInfo::getIdentity, sampleRegistrationDto.getIdentity()))
-                            .or(query -> query.eq(PatientInfo::getPhone, sampleRegistrationDto.getPhone()))
+                            .and(wrapper -> {
+                                // 只有当identity不为空且不为空字符串时才作为条件
+                                if (StringUtils.isNotBlank(sampleRegistrationDto.getIdentity())) {
+                                    wrapper.or().eq(PatientInfo::getIdentity, sampleRegistrationDto.getIdentity());
+                                }
+                                // 只有当phone不为空且不为空字符串时才作为条件
+                                if (StringUtils.isNotBlank(sampleRegistrationDto.getPhone())) {
+                                    wrapper.or().eq(PatientInfo::getPhone, sampleRegistrationDto.getPhone());
+                                }
+                            })
             );
         } catch (com.baomidou.mybatisplus.core.exceptions.MybatisPlusException e ) {
             // 捕获原始异常，抛出包含详细信息的自定义异常
@@ -117,6 +126,7 @@ public class SampleServiceImpl implements SampleService {
     @Transactional
     public void handleExaminationInfo(SampleRegistrationDto sampleRegistrationDto, Long sampleOid) {
         ExaminationInfo exam = null;
+        log.info("sampleRegistrationDto:{}", sampleRegistrationDto);
         // 1. 根据sample_oid查询检查信息
         try {
             exam = examinationInfoMapper.selectOne(
@@ -126,14 +136,16 @@ public class SampleServiceImpl implements SampleService {
         }catch (com.baomidou.mybatisplus.core.exceptions.MybatisPlusException e ){
             throw new TooManyResultsException("t_lis_examination", "sample_oid");
         }
-
+        log.info("原exam:{}", exam);
         if (exam == null) {
             // 2. 如果不存在，则创建新检查信息
             exam = BuildUtil.buildExaminationInfo(sampleRegistrationDto, sampleOid);
             examinationInfoMapper.insert(exam);
         } else {
             // 3. 如果存在，则更新检查信息
+
             UpdateUtil.updateExaminationInfo(exam, sampleRegistrationDto, sampleOid);
+            log.info("更新后exam:{}", exam);
             examinationInfoMapper.updateById(exam);
         }
     }

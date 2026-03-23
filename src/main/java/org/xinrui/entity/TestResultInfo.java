@@ -1,9 +1,6 @@
 package org.xinrui.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -49,7 +46,7 @@ public class TestResultInfo implements Serializable {
 
     @ApiModelProperty(value = "唐筛结果：13-三体，低风险、13-三体，中风险、13-三体，高风险、18-三体，低风险、18-三体，中风险、18-三体，高风险、\n" +
             "21-三体，低风险、21-三体，中风险、21-三体，高风险", example = "1")
-    @TableField("down_screening_result")
+    @TableField(value = "down_screening_result",insertStrategy = FieldStrategy.IGNORED)
     private Integer downScreeningResult;
 
     @ApiModelProperty(value = "13 三体 检测值", example = "0.0050")
@@ -125,7 +122,7 @@ public class TestResultInfo implements Serializable {
     private String testChrOther;
 
     @ApiModelProperty(value = "异常染色体计数", example = "0")
-    @TableField("abnormal_chr_num")
+    @TableField(value = "abnormal_chr_num",insertStrategy = FieldStrategy.IGNORED)
     private Integer abnormalChrNum;
 
     @ApiModelProperty(value = "补充信息", example = "建议定期复查")
