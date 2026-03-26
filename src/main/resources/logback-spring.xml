@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 使用属性定义日志路径 -->
-    <property name="LOG_HOME" value="D:/service/HIS_page_renovation/node8031/log"/>
+    <property name="LOG_HOME" value="D:/Service/BGI/node8031/log"/>
 
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

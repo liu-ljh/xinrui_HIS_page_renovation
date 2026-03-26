@@ -1,6 +1,6 @@
 server:
-  port: 8030
-  address: 172.18.4.89
+  port: 8031
+  address: 192.168.3.17
 
 spring:
   datasource:
@@ -30,10 +30,6 @@ spring:
         max-wait: -1ms
         max-idle: 8
         min-idle: 0
-  cloud:
-    nacos:
-      discovery:
-        enabled: false # 在生产环境禁用发现客户端
 
 
   servlet:
